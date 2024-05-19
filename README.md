@@ -39,7 +39,7 @@ will behave same as
 ```
 alert("hello");
 ```
-Feel free to change something to make this code run better. I know this code have bugs and is barely running by god's grace but I will try to optimise it afterwards ```basically i am procastinating```
+Feel free to change something to make this code run better. I know this code have bugs and is barely running by god's grace but I will try to optimise it afterwards ```basically i am procrastinating```
 Bye for now, see you soon again!
 
 ```Made and organised by: Baltej Singh```
