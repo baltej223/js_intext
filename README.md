@@ -11,7 +11,7 @@ Output:
 ## Usage:
 Put the following link in your Head tag.
 ```
-https://baltej223.github.io/js_intext/main.js
+<script src="https://baltej223.github.io/js_intext/main.js"></script>
 ```
 So basically it is used to write JS as normal text in body tag and the value that written js is going to return will be printed on orginal place. 
 You have to specify what you have written in double brackets is JS or is some Variable by adding JS/VAR as a indentifier in the begining. For example
