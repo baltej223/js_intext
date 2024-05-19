@@ -49,15 +49,15 @@ console.log("_() run");
         let i = 1;
         while (i<=count){
             let js_inside_brackets_incbr = extract.brackets()[i-1];
-            if (js_inside_brackets_incbr.includes("VAR ")){
+            if (js_inside_brackets_incbr.includes("VAR ") || js_inside_brackets_incbr.includes("V ")){
                 let Only_var = js_inside_brackets_incbr.replace("VAR ","").replaceAll("{{","").replaceAll("}}","");
                 eval(`Only_var_val = ${Only_var}`);
                 document.body.innerHTML = document.body.innerHTML.replaceAll(js_inside_brackets_incbr,Only_var_val); 
             }
-            else if (js_inside_brackets_incbr.includes("JS ")){
+            else if (js_inside_brackets_incbr.includes("JS ") || js_inside_brackets_incbr.includes("J ")){
                 let inside_without_JS_brac = js_inside_brackets_incbr.replace("JS","").replaceAll("{{","").replaceAll("}}","");
-                eval(`${inside_without_JS_brac}`);
-                document.body.innerHTML = document.body.innerHTML.replaceAll(js_inside_brackets_incbr,"");
+                eval(`returned = ${inside_without_JS_brac}`);
+                document.body.innerHTML = document.body.innerHTML.replaceAll(js_inside_brackets_incbr,returned);
 
             }
             else{
