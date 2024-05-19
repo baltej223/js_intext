@@ -41,5 +41,6 @@ alert("hello");
 ```
 Feel free to change something to make this code run better. I know this code have bugs and is barely running by god's grace but I will try to optimise it afterwards ```basically i am procrastinating```
 Bye for now, see you soon again!
-
+An example project made by me to demostrate its powers:
+https://baltej223.github.io/js_intext/example.html
 ```Made and organised by: Baltej Singh```
