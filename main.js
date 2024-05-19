@@ -45,16 +45,12 @@ checkFor = {
 function _(f) {
 console.log("_() run");
         f();
-        console.log(hey);
         count = checkFor.unwantedBrackets().c;
-        console.log(count);
         let i = 1;
         while (i<=count){
             let js_inside_brackets_incbr = extract.brackets()[i-1];
-            console.log(js_inside_brackets_incbr);
             if (js_inside_brackets_incbr.includes("VAR ")){
                 let Only_var = js_inside_brackets_incbr.replace("VAR ","").replaceAll("{{","").replaceAll("}}","");
-                console.log(Only_var);
                 eval(`Only_var_val = ${Only_var}`);
                 document.body.innerHTML = document.body.innerHTML.replaceAll(js_inside_brackets_incbr,Only_var_val); 
             }
@@ -68,7 +64,6 @@ console.log("_() run");
                 document.body.innerHTML = document.body.innerHTML.replaceAll(js_inside_brackets_incbr,"#Error:1,Type of code in not specified#")
             }
             //let result_of_js_inside = eval(js_inside_brackets.toString());
-           // i++;
+           
         }
     }
-
