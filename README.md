@@ -44,5 +44,7 @@ An example project made by me to demostrate its powers:
 https://baltej223.github.io/js_intext/example.html
 
 Bye for now, see you soon again!
-
+some of bugs to rectify : 
+```<script>//{{JS alert("also works")}}
+</script>```
 ```Made and organised by: Baltej Singh```
