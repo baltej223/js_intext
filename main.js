@@ -1,5 +1,5 @@
 /*
-I have rebuilt this whole framwork using regex, i wansnt using it before. 
+I have rebuilt this whole thing using regex, i wansnt using it before. 
 Its much more better, more smoother, fexible, easy to understand, 
 and it only took me less than 1 hr to build it now, seems like a lot of improvement 
 (in abt 3 months). 
