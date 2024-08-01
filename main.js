@@ -1,74 +1,80 @@
-checkFor = {
-    "CurlyBrackets": function () {
-        document.addEventListener('DOMContentLoaded', function () {
-            if (document.body.innerHTML.includes("{{") && document.body.innerHTML.includes("}}")) {
-                return 1;
+/*
+I have rebuilt this whole framwork using regex, i wansnt using it before. 
+Its much more better, more smoother, fexible, easy to understand, 
+and it only took me less than 1 hr to build it now, seems like a lot of improvement 
+(in abt 3 months). 
+If you want to check out old code goto ./main-old.js but it wont be useful
+OKay ByE
+
+Author : BALTEJ SINGH
+*/
+
+function _(propFunction) {
+    if (typeof propFunction == 'function') {
+        propFunction();
+    }
+    else if (typeof propFunction == "object") {
+        passedObj = propFunction;
+        pObj = propFunction;
+        obj = propFunction;
+        varObj = propFunction;
+        vObj = propFunction;
+    }
+    else if (typeof propFunction == "string") {
+        eval(propFunction);
+    }
+    else {
+        console.error("Data passed is not allowed, only function, object and string is allowed.");
+    }
+}
+function ready(callback) {
+    if (document.readyState != "loading") {
+        callback();
+    }
+    else {
+        document.addEventListener("DOMContentLoaded", () => {
+            callback();
+        })
+    }
+}
+let tools = {
+    startsWith: (string, spaceChar = ' ') => {
+        try {
+            string = string.split(spaceChar);
+            return string[0];
+        }
+        catch (e) {
+            console.error("an error occured, Error: ", e);
+        }
+    }
+}
+ready(
+    () => {
+        document.body.innerHTML = document.body.innerHTML.replace(/\{\{(.*?)\}\}/gs, (code) => {
+            code = code.replace("{{","").replace("}}","").replace("\n","");
+            let typeOfBlock = tools.startsWith(code);
+            if (typeOfBlock.toLowerCase() == "js") {
+                let result = eval(code.replace(typeOfBlock,""));
+                if (result != undefined) {
+                    return result;
+                }
+                else {
+                    return "";
+                }
+            }
+            else if (typeOfBlock.toLowerCase() == "var") {
+                code = code.replace(typeOfBlock,"");
+                eval(`var value = ${code}`);
+                if (value != undefined) {
+                    return value;
+                }
+                else {
+                    return '';
+                }
             }
             else {
-                return 0;
+                return "No type of code block defined"
             }
         });
-    },
-    "unwantedBrackets": function () {
-        if (checkFor.CurlyBrackets) {
-            let c1 = document.body.innerHTML.match(/{{/g).length;
-            let c2 = document.body.innerHTML.match(/}}/g).length;
-            let count;
-            c1 == c2 ? count = c1 : c1 > c2 ? console.error("Double Brckets Stated but not ended") : console.error("Double brackets ended but not started");
-            if (c1 == c2) {
-                return { "c": c1 };
-            }
-        }
-    },
-};
-extract = {
-    "brackets": function () {
-        if (checkFor.CurlyBrackets) {
-            let i = 1;
-            let s = document.body.innerHTML;
-            let d_a = [];
-            let count = checkFor.unwantedBrackets().c;
-            while (i <= count) {
-                let st = s.search("{{") + 1;
-                let ed = s.search("}}") + 1;
-                let Extracted_part = s.slice(st, ed);
-                d_a[i - 1] = "{" + Extracted_part + "}";
-                s = s.replace("{" + Extracted_part + "}", "");
-                i++;
-            }
-            return d_a;
-        }
-
-    },
-};
-
-function _(f) {
-    console.log("_() run");
-    f();
-    count = checkFor.unwantedBrackets().c;
-    let i = 1;
-    while (i <= count) {
-        let js_inside_brackets_incbr = extract.brackets()[i - 1];
-        if (js_inside_brackets_incbr.includes("VAR ")) {
-            let Only_var = js_inside_brackets_incbr.replace("VAR ", "").replaceAll("{{", "").replaceAll("}}", "");
-            eval(`Only_var_val = ${Only_var}`);
-            document.body.innerHTML = document.body.innerHTML.replaceAll(js_inside_brackets_incbr, Only_var_val);
-        }
-        else if (js_inside_brackets_incbr.includes("JS ")) {
-            let inside_without_JS_brac = js_inside_brackets_incbr.replace("JS", "").replaceAll("{{", "").replaceAll("}}", "");
-            eval(`returned = ${inside_without_JS_brac}`);
-            document.body.innerHTML = document.body.innerHTML.replaceAll(js_inside_brackets_incbr, returned);
-
-        }
-        else {
-            document.body.innerHTML = document.body.innerHTML.replaceAll(js_inside_brackets_incbr, "#Error:1,Type of code in not specified#")
-        }
-        //let result_of_js_inside = eval(js_inside_brackets.toString());
-
     }
-
-}
-document.addEventListener('DOMContentLoaded', function () {
-    _(function () { });
-});
-
+);

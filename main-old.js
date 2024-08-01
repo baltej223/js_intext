@@ -20,22 +20,6 @@ checkFor = {
             }
         }
     },
-    "BractetsINScript_element": function () {
-        let script_pos_strt = searchAll("<script>",document.body.innerHTML); //[23,45,90]
-        let script_pos_end = searchAll("</script>",document.body.innerHTML); //[33,68,100]
-        let BracStrt = searchAll("{{",document.body.innerHTML);// [11,67,74]
-        let BracEnd = searchAll("}}",document.body.innerHTML);//[16,72,79]
-        let i = 0;
-        while (i < script_pos_strt.length) {
-            let p = 0;
-            while (p < BracStrt.length) {
-                if (script_pos_strt[i] < BracStrt[p] < BracEnd[p] < script_pos_end[i]) { 
-                    let extract = document.body.innerHTML.slice(BracStrt[p],BracEnd[p]);
-                    console.log(extract);
-                }
-            }
-        }
-    },
 };
 extract = {
     "brackets": function () {
@@ -87,27 +71,4 @@ function _(f) {
 document.addEventListener('DOMContentLoaded', function () {
     _(function () { });
 });
-function ifDOMch() {
-    //if dom content chaged and another brackets are added
-    document.addEventListener("change", function () {
-        if (!document.ready()) {
-            _();
 
-        }
-    });
-}
-function searchAll(data, string) {
-    data == undefined ? console.error("No data provided to search") : (data = data.toString());
-    let spaceToWorkOn;
-    string == undefined ? console.error("No String provided in which search is to be performed") : (spaceToWorkOn = string);
-    let dataArr = [0];
-    let i = 1;
-    while (spaceToWorkOn.includes(data)) {
-        let pos = spaceToWorkOn.search(data);
-        dataArr[i] = dataArr[i - 1] + pos;
-        spaceToWorkOn = spaceToWorkOn.replace(data, "");
-        i++;
-    }
-    dataArr.splice(0, 1);
-    return dataArr;
-}
